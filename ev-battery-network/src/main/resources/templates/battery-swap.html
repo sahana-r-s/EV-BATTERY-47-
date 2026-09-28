@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Battery Swap</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="nav-title">EV Battery Network</div>
+    <ul class="nav-links">
+        <li><a href="/">Dashboard</a></li>
+        <li><a href="/batteries">Battery Packs</a></li>
+        <li><a href="/fleets">Fleet Customers</a></li>
+        <li><a href="/swaps/add">Battery Swap</a></li>
+        <li><a href="/recycling">Recycling</a></li>
+    </ul>
+</nav>
+
+<div class="container">
+    <h1>Perform Battery Swap</h1>
+
+    <!-- Result message shown right after a swap is submitted -->
+    <div class="result-box" th:if="${swapResult != null}"
+         th:classappend="${recyclingRequired} ? 'recycle' : ''">
+        <h2>Battery Swap Successful!</h2>
+        <p><strong>Battery:</strong> <span th:text="${swapResult.batteryCode}"></span></p>
+        <p><strong>SoH:</strong> <span th:text="${swapResult.stateOfHealth}"></span>%</p>
+        <p><strong>Swap Charge:</strong> ₹<span th:text="${swapResult.swapCharge}"></span></p>
+        <p><strong>Recycling Required:</strong>
+            <span th:text="${recyclingRequired} ? 'YES' : 'NO'"></span>
+        </p>
+        <p><strong>Battery Status:</strong> <span th:text="${swapResult.status}"></span></p>
+    </div>
+
+    <form class="form-box" th:action="@{/swaps/add}" method="post">
+
+        <label>Fleet</label>
+        <select name="fleetId" required>
+            <option value="" disabled selected>-- Select Fleet --</option>
+            <option th:each="fleet : ${fleets}" th:value="${fleet.id}" th:text="${fleet.fleetName}"></option>
+        </select>
+
+        <label>Battery</label>
+        <select name="batteryId" required>
+            <option value="" disabled selected>-- Select Battery --</option>
+            <option th:each="battery : ${batteries}" th:value="${battery.id}" th:text="${battery.batteryCode}"></option>
+        </select>
+
+        <label>State of Health (%)</label>
+        <input type="number" step="0.1" min="0" max="100" name="stateOfHealth" placeholder="e.g. 65" required>
+
+        <label>Swap Charge (₹)</label>
+        <input type="number" step="0.1" name="swapCharge" placeholder="e.g. 450" required>
+
+        <button type="submit" class="btn">Perform Battery Swap</button>
+    </form>
+</div>
+
+</body>
+</html>

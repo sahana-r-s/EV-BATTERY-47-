@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Fleet Customers</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="nav-title">EV Battery Network</div>
+    <ul class="nav-links">
+        <li><a href="/">Dashboard</a></li>
+        <li><a href="/batteries">Battery Packs</a></li>
+        <li><a href="/fleets">Fleet Customers</a></li>
+        <li><a href="/swaps/add">Battery Swap</a></li>
+        <li><a href="/recycling">Recycling</a></li>
+    </ul>
+</nav>
+
+<div class="container">
+    <h1>Fleet Customers</h1>
+    <a class="btn" href="/fleets/add">+ Register Fleet</a>
+
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Fleet Name</th>
+            <th>Driver Name</th>
+            <th>Phone</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="fleet : ${fleets}">
+            <td th:text="${fleet.id}"></td>
+            <td th:text="${fleet.fleetName}"></td>
+            <td th:text="${fleet.driverName}"></td>
+            <td th:text="${fleet.phone}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

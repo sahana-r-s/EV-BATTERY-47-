@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Recycling</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="nav-title">EV Battery Network</div>
+    <ul class="nav-links">
+        <li><a href="/">Dashboard</a></li>
+        <li><a href="/batteries">Battery Packs</a></li>
+        <li><a href="/fleets">Fleet Customers</a></li>
+        <li><a href="/swaps/add">Battery Swap</a></li>
+        <li><a href="/recycling">Recycling</a></li>
+    </ul>
+</nav>
+
+<div class="container">
+    <h1>Batteries Marked for Recycling</h1>
+    <p class="subtitle">Batteries with State of Health below 70% are shown here automatically.</p>
+
+    <table>
+        <thead>
+        <tr>
+            <th>Battery Code</th>
+            <th>SoH (%)</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="battery : ${recyclingBatteries}">
+            <td th:text="${battery.batteryCode}"></td>
+            <td th:text="${battery.stateOfHealth}"></td>
+            <td>
+                <span class="status" th:classappend="${battery.status}" th:text="${battery.status}"></span>
+            </td>
+            <td>
+                <a th:if="${battery.status != 'RECYCLED'}"
+                   class="btn"
+                   th:href="@{'/recycling/process/' + ${battery.id}}">Send to Recycling</a>
+                <span th:if="${battery.status == 'RECYCLED'}">Processed</span>
+            </td>
+        </tr>
+        <tr th:if="${#lists.isEmpty(recyclingBatteries)}">
+            <td colspan="4">No batteries currently need recycling.</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Register Fleet</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="nav-title">EV Battery Network</div>
+    <ul class="nav-links">
+        <li><a href="/">Dashboard</a></li>
+        <li><a href="/batteries">Battery Packs</a></li>
+        <li><a href="/fleets">Fleet Customers</a></li>
+        <li><a href="/swaps/add">Battery Swap</a></li>
+        <li><a href="/recycling">Recycling</a></li>
+    </ul>
+</nav>
+
+<div class="container">
+    <h1>Register Electric Taxi Fleet</h1>
+
+    <form class="form-box" th:action="@{/fleets/add}" th:object="${fleetCustomer}" method="post">
+
+        <label>Fleet Name</label>
+        <input type="text" th:field="*{fleetName}" placeholder="e.g. Green Taxi Fleet" required>
+
+        <label>Driver Name</label>
+        <input type="text" th:field="*{driverName}" placeholder="e.g. Arun" required>
+
+        <label>Phone</label>
+        <input type="text" th:field="*{phone}" placeholder="e.g. 9876543210" required>
+
+        <button type="submit" class="btn">Register Fleet</button>
+    </form>
+</div>
+
+</body>
+</html>

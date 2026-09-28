@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Swap History</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="nav-title">EV Battery Network</div>
+    <ul class="nav-links">
+        <li><a href="/">Dashboard</a></li>
+        <li><a href="/batteries">Battery Packs</a></li>
+        <li><a href="/fleets">Fleet Customers</a></li>
+        <li><a href="/swaps/add">Battery Swap</a></li>
+        <li><a href="/recycling">Recycling</a></li>
+    </ul>
+</nav>
+
+<div class="container">
+    <h1>Swap History</h1>
+    <a class="btn btn-secondary" href="/swaps/add">+ Perform Battery Swap</a>
+
+    <table>
+        <thead>
+        <tr>
+            <th>Swap ID</th>
+            <th>Fleet</th>
+            <th>Battery</th>
+            <th>SoH (%)</th>
+            <th>Charge (₹)</th>
+            <th>Status</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="swap : ${swaps}">
+            <td th:text="${swap.id}"></td>
+            <td th:text="${swap.fleetName}"></td>
+            <td th:text="${swap.batteryCode}"></td>
+            <td th:text="${swap.stateOfHealth}"></td>
+            <td th:text="${swap.swapCharge}"></td>
+            <td>
+                <span class="status" th:classappend="${swap.status}" th:text="${swap.status}"></span>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>EV Battery Swapping & Recycling Network</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="nav-title">EV Battery Network</div>
+    <ul class="nav-links">
+        <li><a href="/">Dashboard</a></li>
+        <li><a href="/batteries">Battery Packs</a></li>
+        <li><a href="/fleets">Fleet Customers</a></li>
+        <li><a href="/swaps/add">Battery Swap</a></li>
+        <li><a href="/recycling">Recycling</a></li>
+    </ul>
+</nav>
+
+<div class="container">
+    <h1>EV Battery Swapping & Recycling Network</h1>
+    <p class="subtitle">Public EV Fleet Battery Swapping &amp; Circular Recycling Network</p>
+
+    <div class="card-grid">
+        <div class="card">
+            <h3>Total Batteries</h3>
+            <p class="card-number" th:text="${totalBatteries}">0</p>
+        </div>
+        <div class="card">
+            <h3>Available Batteries</h3>
+            <p class="card-number" th:text="${availableBatteries}">0</p>
+        </div>
+        <div class="card">
+            <h3>Total Fleets</h3>
+            <p class="card-number" th:text="${totalFleets}">0</p>
+        </div>
+        <div class="card">
+            <h3>Batteries for Recycling</h3>
+            <p class="card-number" th:text="${recyclingBatteries}">0</p>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

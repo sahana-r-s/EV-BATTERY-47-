@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Battery Packs</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="nav-title">EV Battery Network</div>
+    <ul class="nav-links">
+        <li><a href="/">Dashboard</a></li>
+        <li><a href="/batteries">Battery Packs</a></li>
+        <li><a href="/fleets">Fleet Customers</a></li>
+        <li><a href="/swaps/add">Battery Swap</a></li>
+        <li><a href="/recycling">Recycling</a></li>
+    </ul>
+</nav>
+
+<div class="container">
+    <h1>Battery Packs</h1>
+    <a class="btn" href="/batteries/add">+ Add Battery</a>
+
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Battery Code</th>
+            <th>Capacity (kWh)</th>
+            <th>SoH (%)</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="battery : ${batteries}">
+            <td th:text="${battery.id}"></td>
+            <td th:text="${battery.batteryCode}"></td>
+            <td th:text="${battery.capacity}"></td>
+            <td th:text="${battery.stateOfHealth}"></td>
+            <td>
+                <span class="status" th:classappend="${battery.status}" th:text="${battery.status}"></span>
+            </td>
+            <td>
+                <span th:if="${battery.stateOfHealth < 70}" class="warning">Needs Recycling</span>
+                <span th:unless="${battery.stateOfHealth < 70}">OK</span>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>
